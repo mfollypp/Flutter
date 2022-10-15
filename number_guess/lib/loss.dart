@@ -9,45 +9,59 @@ class Loss extends StatefulWidget {
 	State<Loss> createState() => _LossState();
 }
 
-class NumeroSorteado {
+class randomNumber {
 	int num = 0;
 
-	NumeroSorteado(this.num);
+	randomNumber(this.num);
 }
 
 class _LossState extends State<Loss> {
 	@override
 	Widget build(BuildContext context) {
-		var n = ModalRoute.of(context)!.settings.arguments as NumeroSorteado;
-		return Scaffold(
-			backgroundColor: Colors.white,
-			body: Center(
-				child: Column(
-					mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-					children: [
-						Text(
-							"More Luck Next Time!",
-							style: TextStyle(
-								fontSize: 25
+		var n = ModalRoute.of(context)!.settings.arguments as randomNumber;
+		return Container(
+			constraints: const BoxConstraints.expand(),
+			decoration: const BoxDecoration(
+				image: DecorationImage(
+					image: AssetImage("images/numbers_background.jpg"), 
+					fit: BoxFit.cover
+				)
+			),
+			child: Scaffold(
+				backgroundColor: Colors.transparent,
+				body: Center(
+					child: Column(
+						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+						children: [
+							Text(
+								"More Luck Next Time!",
+								style: TextStyle(
+									fontSize: 25
+								),
 							),
-						),
-						Text(
-							"Score: " + n.num.toString(),
-							style: TextStyle(
-								fontSize: 30
+							Text(
+								"Score: " + n.num.toString(),
+								style: TextStyle(
+									fontSize: 30
+								),
 							),
-						),
-						SizedBox(
-							height: 25,
-							width: 70,
-							child: ElevatedButton(
-								onPressed: () {
-									Navigator.pushNamed(context, "/menu");
-								},
-								child: const Text("Back"),
-							),
-						)
-					]
+							SizedBox(
+								width: 150,
+								height: 50,
+								child: ElevatedButton(
+									onPressed: () {
+										Navigator.pushNamed(context, "/menu");
+									},
+									child: const Text(
+										"Back",
+										style: TextStyle(
+											fontSize: 30
+										),
+									),
+								),
+							)
+						]
+					)
 				)
 			)
 		);

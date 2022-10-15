@@ -4,12 +4,12 @@ import 'dart:math';
 class Level extends StatefulWidget {
 	static const routeName = "/level";
 
-	static int numero = 0;
-	static int nivel = 0;
+	static int random_number = 0;
+	static int tries = 0;
 
-	static SelecionaNivel(int n) {
-		nivel = n;
-		numero = Random().nextInt(100);
+	static SelectLevel(int n) {
+		tries = n;
+		random_number = Random().nextInt(100);
 	}
 
 	@override
@@ -24,11 +24,12 @@ class _LevelState extends State<Level> {
 			constraints: const BoxConstraints.expand(),
 			decoration: const BoxDecoration(
 				image: DecorationImage(
-					image: AssetImage("images/background.png"), 
+					image: AssetImage("images/numbers_background.jpg"), 
 					fit: BoxFit.cover
 				)
 			),
 			child: Scaffold(
+				backgroundColor: Colors.transparent,
 				body: Center(
 					child: Column(
 						mainAxisAlignment: MainAxisAlignment.center, 
@@ -36,66 +37,78 @@ class _LevelState extends State<Level> {
 							Text(
 								"Select game level",
 								style: TextStyle(
-									fontSize: 25,
+									fontSize: 40,
 									color: Colors.black,
 									fontWeight: FontWeight.bold),
 							),
+							Padding(padding: EdgeInsets.only(top: 100)),
 							SizedBox(
-								height: 100,
-							),
-							SizedBox(
-								height: 30,
-								width: 100,
-								child: ElevatedButton(
-									onPressed: () {
-										Navigator.pushNamed(context, "/play",
-											arguments: Level.SelecionaNivel(20)
-										);
-									},
-									child: const Text("Easy"),
-								),
-							),
-							SizedBox(
+								width: 150,
 								height: 50,
-							),
-							SizedBox(
-								height: 30,
-								width: 100,
 								child: ElevatedButton(
 									onPressed: () {
 										Navigator.pushNamed(context, "/play",
-											arguments: Level.SelecionaNivel(10)
+											arguments: Level.SelectLevel(20)
 										);
 									},
-									child: const Text("Medium"),
+									child: const Text(
+										"Easy",
+										style: TextStyle(
+											fontSize: 30
+										),
+									),
 								),
 							),
+							Padding(padding: EdgeInsets.only(top: 30)),
 							SizedBox(
+								width: 150,
 								height: 50,
-							),
-							SizedBox(
-								height: 30,
-								width: 100,
 								child: ElevatedButton(
 									onPressed: () {
 										Navigator.pushNamed(context, "/play",
-											arguments: Level.SelecionaNivel(6)
+											arguments: Level.SelectLevel(10)
 										);
 									},
-									child: const Text("Hard"),
+									child: const Text(
+										"Medium",
+										style: TextStyle(
+											fontSize: 30
+										),
+									),
 								),
 							),
+							Padding(padding: EdgeInsets.only(top: 30)),
 							SizedBox(
-								height: 150,
+								width: 150,
+								height: 50,
+								child: ElevatedButton(
+									onPressed: () {
+										Navigator.pushNamed(context, "/play",
+											arguments: Level.SelectLevel(6)
+										);
+									},
+									child: const Text(
+										"Hard",
+										style: TextStyle(
+											fontSize: 30
+										),
+									),
+								),
 							),
+							Padding(padding: EdgeInsets.only(top: 100)),
 							SizedBox(
-								height: 25,
-								width: 70,
+								width: 150,
+								height: 50,
 								child: ElevatedButton(
 									onPressed: () {
 										Navigator.pushNamed(context, "/menu");
 									},
-									child: const Text("Back"),
+									child: const Text(
+										"Back",
+										style: TextStyle(
+											fontSize: 30
+										),
+									),
 								),
 							)
 						]	

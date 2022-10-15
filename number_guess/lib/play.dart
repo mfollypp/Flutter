@@ -1,7 +1,6 @@
 import 'package:number_guess/level.dart';
 import 'package:number_guess/win.dart';
 import 'package:flutter/material.dart';
-
 import 'loss.dart';
 
 class Play extends StatefulWidget {
@@ -14,25 +13,25 @@ class Play extends StatefulWidget {
 
 class _PlayState extends State<Play> {
 	TextEditingController controller = TextEditingController();
-	int chute = 0;
+	int guess = 0;
 	String _message = "Are you good at guessing?";
-	int _pontos = 1000;
+	int _score = 1000;
 
-	void geraDica(chute, numero) {
-		if (chute - numero >= 25) {
+	void hint(guess, random_number) {
+		if (guess - random_number >= 25) {
 			_message = "Your guess was way bigger";
-		} else if (chute - numero > 0 && chute - numero < 25) {
+		} else if (guess - random_number > 0 && guess - random_number < 25) {
 			_message = "Your guess was bigger";
-		} else if (numero - chute > 0 && numero - chute < 25) {
+		} else if (random_number - guess > 0 && random_number - guess < 25) {
 			_message = "Your guess was smaller";
 		} else {
 			_message = "Your guess was way smaller!";
 		}
 	}
 
-	void calculaPontos(chute, numero) {
-		int dif = chute - numero;
-		_pontos -= dif.abs();
+	void countScore(guess, random_number) {
+		int dif = guess - random_number;
+		_score -= dif.abs();
 	}
 
 	@override
@@ -41,17 +40,18 @@ class _PlayState extends State<Play> {
 			constraints: const BoxConstraints.expand(),
 			decoration: const BoxDecoration(
 				image: DecorationImage(
-					image: AssetImage("images/background.png"), 
+					image: AssetImage("images/numbers_background.jpg"), 
 					fit: BoxFit.cover
 				)
 			),
 			child: Scaffold(
+				backgroundColor: Colors.transparent,
 				body: Center(
 					child: Column(
 						mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 						children: [
 							Text(
-								"Left tries: " + Level.nivel.toString(),
+								"Left tries: " + Level.tries.toString(),
 								style: TextStyle(
 									fontSize: 30
 								),
@@ -71,38 +71,49 @@ class _PlayState extends State<Play> {
 										border: UnderlineInputBorder(),
 										label: const Center(
 											child: Text(
-												"Enter a guess:",
+												"Type a guess:",
 												style: TextStyle(
-													fontSize: 20
+													fontSize: 20,
+													fontWeight: FontWeight.bold
 												),
 											),
 										),
 									),
 									onChanged: (n) {
 										setState(() {
-											chute = int.parse(n);
+											guess = int.parse(n);
 										});
 									},
 								)
 							),
-							ElevatedButton(
-								onPressed: () {
-									setState(() {
-										Level.nivel--;
-										controller.clear();
-									});
-									if (chute == Level.numero) {
-										Navigator.pushNamed(context, "/win",
-											arguments: Pontuacao(_pontos));
-									} else if (Level.nivel == 0) {
-										Navigator.pushNamed(context, "/loss",
-											arguments: NumeroSorteado(Level.numero));
-									} else {
-										geraDica(chute, Level.numero);
-										calculaPontos(chute, Level.numero);
-									}
-								},
-								child: const Text("Enter Guess"))
+							SizedBox(
+								width: 150,
+								height: 50,
+								child: ElevatedButton(
+									onPressed: () {
+										setState(() {
+											Level.tries--;
+											controller.clear();
+										});
+										if (guess == Level.random_number) {
+											Navigator.pushNamed(context, "/win",
+												arguments: totalScore(_score));
+										} else if (Level.tries == 0) {
+											Navigator.pushNamed(context, "/loss",
+												arguments: randomNumber(Level.random_number));
+										} else {
+											hint(guess, Level.random_number);
+											countScore(guess, Level.random_number);
+										}
+									},
+									child: const Text(
+										"Enter",
+										style: TextStyle(
+											fontSize: 30
+										),
+									)
+								)
+							)
 						],
 					),
 				)

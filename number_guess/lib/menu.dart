@@ -16,28 +16,38 @@ class _MenuState extends State<Menu> {
 			constraints: const BoxConstraints.expand(),
 			decoration: const BoxDecoration(
 				image: DecorationImage(
-					image: AssetImage("images/background.png"), fit: BoxFit.cover
+					image: AssetImage("images/numbers_background.jpg"), 
+					fit: BoxFit.cover
 				)
 			),
 			child: Scaffold(
+				backgroundColor: Colors.transparent,
 				body: Center(
 					child: Column(
 						mainAxisAlignment: MainAxisAlignment.center,
 						children: [
 							Container(
 								child: Text(
-									"Number Guess Game"
+									"Number Guess Game",
+									style: TextStyle(
+										fontSize: 40,
+									),
 								)
 							),
+							Padding(padding: EdgeInsets.only(top: 150)),
 							SizedBox(
-								height: 150,
-							),
-							SizedBox(
+								width: 150,
+								height: 50,
 								child: ElevatedButton(
 									onPressed: () {
 										Navigator.pushNamed(context, "/level");
 									},
-									child: const Text("Play"),
+									child: const Text(
+										"Play",
+										style: TextStyle(
+											fontSize: 30,
+										),
+									),
 								),
 							),
 						]
