@@ -1,12 +1,23 @@
-import 'package:number_guess/pages/home.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:number_guess/menu.dart';
+import 'package:number_guess/level.dart';
+import 'package:number_guess/play.dart';
+import 'package:number_guess/win.dart';
+import 'package:number_guess/loss.dart';
 
 void main() {
-    runApp(MaterialApp(
-        title: "Guess the Number",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: Color.fromARGB(255, 88, 88, 88)),
-        home: Home(),
-    ));
+	runApp(
+		MaterialApp(
+			debugShowCheckedModeBanner: false,
+			title: "Number Guess Game",
+			initialRoute: "/menu",
+			routes: {
+				"/menu": (context) => Menu(),
+				"/level": (context) => Level(),
+				"/play": (context) => Play(),
+				"/win": (context) => Win(),
+				"/loss": (context) => Loss()
+			},
+  		)
+	);
 }
