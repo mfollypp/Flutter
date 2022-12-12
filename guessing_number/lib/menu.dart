@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 class Menu extends StatefulWidget {
 	static const routeName = "/menu";
+    
 	@override
-	State<Menu> createState() => _MenuState();
+	State<Menu> createState(){ 
+        return _MenuState();
+    }
 }
 
 class _MenuState extends State<Menu> {
@@ -27,13 +30,17 @@ class _MenuState extends State<Menu> {
 								"Guessing Number Game",
 								style: TextStyle(
 									fontSize: 40,
+                                    fontWeight: FontWeight.bold
 								),
 							),
-							const Padding(padding: EdgeInsets.only(top: 150)),
+							const Padding(padding: EdgeInsets.only(top: 50)),
 							SizedBox(
 								width: 150,
 								height: 50,
 								child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.purple[400]
+                                    ),
 									onPressed: () {
 										Navigator.pushNamed(context, "/level");
 									},
@@ -41,6 +48,7 @@ class _MenuState extends State<Menu> {
 										"Play",
 										style: TextStyle(
 											fontSize: 30,
+                                            fontWeight: FontWeight.bold
 										),
 									),
 								),

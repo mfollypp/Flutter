@@ -12,11 +12,21 @@ void main() {
 			title: "Guessing Number Game",
 			initialRoute: "/menu",
 			routes: {
-				"/menu": (context) => Menu(),
-				"/level": (context) => Level(),
-				"/play": (context) => Play(),
-				"/win": (context) => Win(),
-				"/loss": (context) => Loss()
+				"/menu": (context){ 
+                    return Menu();
+                },
+				"/level": (context) {
+                    return Level();
+                },
+				"/play": (context) {
+                    return Play();
+                },
+                "/loss": (context) {
+                    return Loss();
+                },
+				"/win": (context) {
+                    return Win();
+                }
 			},
   		)
 	);
