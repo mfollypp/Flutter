@@ -4,7 +4,9 @@ class Win extends StatefulWidget {
 	static const routeName = "/win";
 
 	@override
-	State<Win> createState() => _WinState();
+	State<Win> createState(){
+        return _WinState();
+    }
 }
 
 class totalScore {
@@ -15,7 +17,7 @@ class totalScore {
 class _WinState extends State<Win> {
 	@override
 	Widget build(BuildContext context) {
-		var p = ModalRoute.of(context)!.settings.arguments as totalScore;
+		var tScore = ModalRoute.of(context)!.settings.arguments as totalScore;
 		return Container(
 			constraints: const BoxConstraints.expand(),
 			decoration: const BoxDecoration(
@@ -33,26 +35,32 @@ class _WinState extends State<Win> {
 							Text(
 								"Congrats You Won!",
 								style: TextStyle(
-									fontSize: 30
+									fontSize: 30,
+                                    fontWeight: FontWeight.bold
 								),
 							),
 							Text(
-								"Score: " + p.score.toString(),
+								"Score: ${tScore.score}",
 								style: TextStyle(
-									fontSize: 25
+									fontSize: 25,
+                                    fontWeight: FontWeight.bold
 								),
 							),
 							SizedBox(
 								width: 150,
 								height: 50,
 								child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.purple[400]
+                                    ),
 									onPressed: () {
 										Navigator.pushNamed(context, "/menu");
 									},
 									child: const Text(
 										"Back",
 										style: TextStyle(
-											fontSize: 30
+											fontSize: 30,
+                                            fontWeight: FontWeight.bold
 										),
 									),
 								),
